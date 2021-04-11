@@ -12,12 +12,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // If we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
-};
+  app.use(express.static(path.join(__dirname, '../client/build')));
+}
 
 // Use the Routes
 app.use(routes);
 
 db.once('open', () => {
-    app.listen(PORT, () => console.log(`🌍 Server is running on PORT ${PORT}!`));
+  app.listen(PORT, () => console.log(`🌍 Server is running on PORT ${PORT}!`));
 });
