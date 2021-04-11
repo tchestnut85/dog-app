@@ -77,24 +77,24 @@ module.exports = {
   },
 
   // Delete a user
-  async deleteUser({ params }, res) {
-    const deletedUser = await User.findOneAndDelete({ _id: params._id });
+  // async deleteUser({ params }, res) {
+  //   const deletedUser = await User.findOneAndDelete({ _id: params._id });
 
-    if (!deleteduser) {
-      return res
-        .status(404)
-        .json({ message: "Couldn't find user with that ID." });
-    }
+  //   if (!deletedUser) {
+  //     return res
+  //       .status(404)
+  //       .json({ message: "Couldn't find user with that ID." });
+  //   }
 
-    const deletedSightings = await Sighting.deleteMany(
-      { username: deletedUser.name },
-      { new: true, runValidators: true }
-    );
+  //   const deletedSightings = await Sighting.deleteMany(
+  //     { username: deletedUser.name },
+  //     { new: true, runValidators: true }
+  //   );
 
-    res.json({
-      message: `${deletedUser.name} was deleted.`,
-      deletedUser,
-      deletedSightings,
-    });
-  },
+  //   res.json({
+  //     message: `${deletedUser.name} was deleted.`,
+  //     deletedUser,
+  //     deletedSightings,
+  //   });
+  // },
 };

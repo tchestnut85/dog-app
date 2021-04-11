@@ -47,7 +47,7 @@ userSchema.pre('save', async function (next) {
 
 // validate and compare the incoming passwird wuth the hashed one
 userSchema.methods.isCorrectPassword = async function (password) {
-  return brcrypt.compare(password, this.password);
+  return bcrypt.compare(password, this.password);
 };
 
 // When querying a user, get the total number of dog sightings they have
