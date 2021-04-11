@@ -25,6 +25,7 @@
     "if-env": "^1.0.4"
   },
   "devDependencies": {
-    "concurrently": "^6.0.0"
+    "concurrently": "^6.0.0",
+    "prettier": "^2.2.1"
   }
 }
