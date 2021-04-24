@@ -13,6 +13,8 @@ module.exports = {
         .status(400)
         .json({ message: 'No sightings found due to a request error.' });
     }
+
+    res.json(sightings);
   },
 
   // Get one sighting
