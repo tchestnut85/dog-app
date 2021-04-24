@@ -1,12 +1,12 @@
-const { User } = require('../models');
+const { User, Sighting } = require('../models');
 const { signToken } = require('../utils/auth');
 
 module.exports = {
   // GET all users
   async getAllUsers(req, res) {
-    const users = await User.find({})
-      .populate({ path: 'sightings', select: '-__v' })
-      .select('-__v');
+    const users = await User.find({}).select('-__v');
+    // ! Getting an error when the populate is turned on
+    // .populate('sightings');
 
     if (!users) {
       return res.status(400).json({ message: "Couldn't find users." });
@@ -77,24 +77,24 @@ module.exports = {
   },
 
   // Delete a user
-  // async deleteUser({ params }, res) {
-  //   const deletedUser = await User.findOneAndDelete({ _id: params._id });
+  async deleteUser({ params }, res) {
+    const deletedUser = await User.findOneAndDelete({ _id: params._id });
 
-  //   if (!deletedUser) {
-  //     return res
-  //       .status(404)
-  //       .json({ message: "Couldn't find user with that ID." });
-  //   }
+    if (!deletedUser) {
+      return res
+        .status(404)
+        .json({ message: "Couldn't find user with that ID." });
+    }
 
-  //   const deletedSightings = await Sighting.deleteMany(
-  //     { username: deletedUser.name },
-  //     { new: true, runValidators: true }
-  //   );
+    const deletedSightings = await Sighting.deleteMany(
+      { username: deletedUser.name },
+      { new: true, runValidators: true }
+    );
 
-  //   res.json({
-  //     message: `${deletedUser.name} was deleted.`,
-  //     deletedUser,
-  //     deletedSightings,
-  //   });
-  // },
+    res.json({
+      message: `${deletedUser.name} was deleted.`,
+      deletedUser,
+      deletedSightings,
+    });
+  },
 };
