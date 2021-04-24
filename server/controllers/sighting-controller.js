@@ -41,9 +41,10 @@ module.exports = {
 
     await User.findByIdAndUpdate(
       { _id: body.userId },
-      { $push: { sightings: body._id } },
+      { $push: { sightings: newSighting._id } },
       { new: true }
     );
+    res.json(newSighting);
   },
 
   // Update a sighting
