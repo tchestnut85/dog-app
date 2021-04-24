@@ -9,7 +9,7 @@ const {
   getSingleUser,
 } = require('../../controllers/user-controller');
 
-const { authMiddleware } = require('../../utils/auth');
+// const { authMiddleware } = require('../../utils/auth');
 
 // setup authMiddleware whereever a token is needed for user verification
 
@@ -25,7 +25,7 @@ router.route('/login').post(loginUser);
 
 router
   .route('/:id')
-  .get(authMiddleware, getSingleUser)
+  .get(getSingleUser)
   // Update a user route
   .put(updateUser)
   // Delete a user route

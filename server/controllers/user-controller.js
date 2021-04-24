@@ -53,7 +53,7 @@ module.exports = {
     const foundUser = await User.findOne({
       $or: [{ _id: user ? user._id : params.id }, { name: params.name }],
     })
-      .populate({ path: 'sightings', select: '-__v' })
+      // .populate({ path: 'sightings', select: '-__v' })
       .select('-__v');
 
     if (!foundUser) {
@@ -64,8 +64,8 @@ module.exports = {
   },
 
   // Update a user
-  async updateUser({ user, body }, res) {
-    const updatedUser = await User.findOneAndUpdate({ _id: user._id }, body, {
+  async updateUser({ params, body }, res) {
+    const updatedUser = await User.findOneAndUpdate({ _id: params.id }, body, {
       new: true,
       runValidators: true,
     }).select('-__v');
@@ -78,7 +78,7 @@ module.exports = {
 
   // Delete a user
   async deleteUser({ params }, res) {
-    const deletedUser = await User.findOneAndDelete({ _id: params._id });
+    const deletedUser = await User.findOneAndDelete({ _id: params.id });
 
     if (!deletedUser) {
       return res
@@ -86,15 +86,17 @@ module.exports = {
         .json({ message: "Couldn't find user with that ID." });
     }
 
-    const deletedSightings = await Sighting.deleteMany(
-      { username: deletedUser.name },
-      { new: true, runValidators: true }
-    );
+    try {
+      await Sighting.deleteMany(
+        { username: deletedUser.name },
+        { new: true, runValidators: true }
+      );
+    } catch (err) {
+      console.error(err);
+    }
 
     res.json({
       message: `${deletedUser.name} was deleted.`,
-      deletedUser,
-      deletedSightings,
     });
   },
 };
