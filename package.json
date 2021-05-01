@@ -1,5 +1,8 @@
 {
   "name": "dog-sighting-app",
+  "jest": {
+    "prettierPath": "prettier"
+  },
   "version": "1.0.0",
   "description": "App to track dog sightings.",
   "main": "server/server.js",
