@@ -1,0 +1,36 @@
+{
+  "name": "dog-sighting-app",
+  "jest": {
+    "prettierPath": "prettier"
+  },
+  "version": "1.0.0",
+  "description": "App to track dog sightings.",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "cd server && npm start",
+    "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "heroku-postbuild": "cd client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tchestnut85/dog-app.git"
+  },
+  "author": "Tom Chestnut & Scott Chestnut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tchestnut85/dog-app/issues"
+  },
+  "homepage": "https://github.com/tchestnut85/dog-app#readme",
+  "dependencies": {
+    "if-env": "^1.0.4"
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.0",
+    "eslint": "^7.24.0",
+    "eslint-plugin-react": "^7.23.2",
+    "prettier": "2.3.1"
+  }
+}
