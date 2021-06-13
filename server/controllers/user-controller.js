@@ -31,7 +31,7 @@ module.exports = {
   async loginUser({ body }, res) {
     // login the user, sign the token and send it back
     const user = await User.findOne({
-      name: body.name,
+      name: body.name
     });
 
     if (!user) {
@@ -51,7 +51,7 @@ module.exports = {
   // Get a single user by either their ID or name
   async getSingleUser({ user = null, params }, res) {
     const foundUser = await User.findOne({
-      $or: [{ _id: user ? user._id : params.id }, { name: params.name }],
+      $or: [{ _id: user ? user._id : params.id }, { name: params.name }]
     })
       // .populate({ path: 'sightings', select: '-__v' })
       .select('-__v');
@@ -67,7 +67,7 @@ module.exports = {
   async updateUser({ params, body }, res) {
     const updatedUser = await User.findOneAndUpdate({ _id: params.id }, body, {
       new: true,
-      runValidators: true,
+      runValidators: true
     }).select('-__v');
 
     if (!updatedUser) {
@@ -96,7 +96,7 @@ module.exports = {
     }
 
     res.json({
-      message: `${deletedUser.name} was deleted.`,
+      message: `${deletedUser.name} was deleted.`
     });
-  },
+  }
 };

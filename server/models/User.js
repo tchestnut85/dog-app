@@ -7,31 +7,31 @@ const userSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      lowercase: true,
+      lowercase: true
     },
     email: {
       type: String,
       required: true,
       trim: true,
-      lowercase: true,
+      lowercase: true
     },
     password: {
       type: String,
       required: true,
       trim: true,
-      minLength: 6,
+      minLength: 6
     },
     sightings: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Sighting',
-      },
-    ],
+        ref: 'Sighting'
+      }
+    ]
   },
   {
     toJSON: {
-      virtuals: true,
-    },
+      virtuals: true
+    }
   }
 );
 
