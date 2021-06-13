@@ -1,4 +1,5 @@
 const { Sighting, User } = require('../models');
+const { authMiddleware } = require('../utils/auth');
 
 module.exports = {
   // Get all sightings
@@ -48,6 +49,41 @@ module.exports = {
   }
 
   // Update a sighting
+  async updateSighting({ body, params }, res) {
+    const updatedSighting = await Sighting.findOneAndUpdate(
+      { _id: params.id },
+      body,
+      {
+        new: true,
+        runValidators: true
+      }
+    );
+
+    if (!updatedSighting) {
+      return res.status(404).json({ message: 'Dog sighting not found.' });
+    }
+
+    res.json({ message: 'The dog sighting was updated.' });
+  },
 
   // Delete a sighting
+  async deleteSighting({ user, params }, res) {
+    if (!(user && user._id)) {
+      return res.status(404).json({ message: 'No user.' });
+    }
+    const foundUser = await User.findOne({ _id: user._id });
+    if (!foundUser) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    const deletedSighting = await Sighting.findOneAndDelete({
+      _id: params.id,
+      user: foundUser._id
+    });
+    if (!deletedSighting) {
+      return res.status(404).json({ message: 'Dog sighting not found.' });
+    }
+
+    res.json({ message: 'The dog sighting was deleted.' });
+  }
 };

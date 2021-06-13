@@ -34,6 +34,10 @@ const sightingSchema = new Schema(
       // ? should be the latitude & longitude if the person is on mobile using the app
       type: [Number]
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
     createdAt: {
       type: Date,
       default: Date.now(),
