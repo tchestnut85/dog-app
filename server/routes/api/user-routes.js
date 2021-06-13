@@ -6,7 +6,7 @@ const {
   deleteUser,
   createUser,
   loginUser,
-  getSingleUser,
+  getSingleUser
 } = require('../../controllers/user-controller');
 
 // const { authMiddleware } = require('../../utils/auth');
