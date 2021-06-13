@@ -1,5 +1,5 @@
-const formatDate = (datetime) => {
-  if (!datetime) {
+const formatDate = (dateTime) => {
+  if (!dateTime) {
     return null;
   }
   const formattedDate = new Intl.DateTimeFormat('en-US').format(

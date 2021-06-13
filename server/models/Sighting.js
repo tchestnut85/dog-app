@@ -7,44 +7,48 @@ const sightingSchema = new Schema(
       type: [String],
       required: true,
       trim: true,
-      lowercase: true,
+      lowercase: true
     },
     dogBreeds: {
       type: [String],
       required: true,
       trim: true,
-      lowercase: true,
+      lowercase: true
     },
     dogAges: {
       type: [Number],
-      min: 1,
+      min: 1
     },
     dogPersonalities: {
       type: [String],
-      enum: ['Cute', 'Grumpy', 'Crazy', 'Doggo', 'Mean', 'Fun', 'Nice'],
+      enum: ['Cute', 'Grumpy', 'Crazy', 'Doggo', 'Mean', 'Fun', 'Nice']
     },
     dogPictures: {
       // TODO: Array of URLs of pictures taken by the user. Will need to figure out image hosting
-      type: [String],
+      type: [String]
     },
     ownerName: {
-      type: String,
+      type: String
     },
     location: {
       // ? should be the latitude & longitude if the person is on mobile using the app
-      type: [Number],
+      type: [Number]
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
     },
     createdAt: {
       type: Date,
       default: Date.now(),
-      get: (createdAtValue) => formatDate(createdAtValue),
-    },
+      get: (createdAtValue) => formatDate(createdAtValue)
+    }
   },
   {
     toJSON: {
       virtuals: true,
-      getters: true,
-    },
+      getters: true
+    }
   }
 );
 
