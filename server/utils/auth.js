@@ -11,9 +11,9 @@ module.exports = {
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 
-  authMiddleware: function ({ req }) {
+  authMiddleware: function (req, res, next) {
     // allows token to be sent via req.body, req,query or headers
-    let token = req.body.token || req.query.token || req.headers.authorization;
+    let token = req.headers.authorization || req.body.token || req.query.token;
 
     // Seperate 'Bearer' from 'token'
     if (req.headers.authorization) {
@@ -22,7 +22,7 @@ module.exports = {
 
     // If no token, return request object as is
     if (!token) {
-      return req;
+      return next();
     }
 
     try {
@@ -34,6 +34,6 @@ module.exports = {
     }
 
     // return the request object
-    return req;
-  },
+    next();
+  }
 };

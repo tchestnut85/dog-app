@@ -1,9 +1,11 @@
 const router = require('express').Router();
-
+const { authMiddleware } = require('../../utils/auth');
 const {
   createSighting,
   getAllSightings,
   getOneSighting,
+  updateSighting,
+  deleteSighting
 } = require('../../controllers/sighting-controller');
 
 router
@@ -13,6 +15,10 @@ router
   .post(createSighting);
 
 // GET one sighting
-router.route('/:id').get(getOneSighting);
+router
+  .route('/:id')
+  .get(getOneSighting)
+  .put(updateSighting)
+  .delete(authMiddleware, deleteSighting);
 
 module.exports = router;
