@@ -46,7 +46,7 @@ module.exports = {
       { new: true }
     );
     res.json(newSighting);
-  }
+  },
 
   // Update a sighting
   async updateSighting({ body, params }, res) {
