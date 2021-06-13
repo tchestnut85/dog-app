@@ -48,6 +48,22 @@ module.exports = {
   },
 
   // Update a sighting
+  async updateSighting({ body, params }, res) {
+    const updatedSighting = await Sighting.findOneAndUpdate(
+      { _id: params.id },
+      body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!updatedSighting) {
+      return res.status(404).json({ message: 'Dog sighting not found.' });
+    }
+
+    res.json({ message: 'The dog sighting was updated.' });
+  },
 
   // Delete a sighting
 };

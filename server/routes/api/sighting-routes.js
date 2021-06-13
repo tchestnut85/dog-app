@@ -4,6 +4,7 @@ const {
   createSighting,
   getAllSightings,
   getOneSighting,
+  updateSighting,
 } = require('../../controllers/sighting-controller');
 
 router
@@ -13,6 +14,6 @@ router
   .post(createSighting);
 
 // GET one sighting
-router.route('/:id').get(getOneSighting);
+router.route('/:id').get(getOneSighting).put(updateSighting);
 
 module.exports = router;
