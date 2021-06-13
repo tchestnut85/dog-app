@@ -35,5 +35,5 @@ module.exports = {
 
     // return the request object
     return req;
-  },
+  }
 };

@@ -45,7 +45,7 @@ module.exports = {
       { new: true }
     );
     res.json(newSighting);
-  },
+  }
 
   // Update a sighting
 
